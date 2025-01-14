@@ -1,53 +1,109 @@
-<mvc:View 
+<mvc:View
     controllerName="sap.ui.demo.shoppingcart.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    xmlns:core="sap.ui.core">
-    <Page 
-        id="page" 
+    xmlns:core="sap.ui.core"
+>
+    <Page
+        id="page"
         title="{i18n>homeTitle}"
-        backgroundDesign="Solid">
+        backgroundDesign="Solid"
+    >
         <landmarkInfo>
-			<PageAccessibleLandmarkInfo
-				rootRole="Region"
-				rootLabel="{i18n>homeTitle} {i18n>Home_rootLabel}"
-				subHeaderRole="Search"
-				subHeaderLabel="{i18n>Home_subHeaderLabel}"
-				contentRole="Navigation"
-				contentLabel="{i18n>Home_contentLabel}"
-				headerRole="Region" headerLabel="{i18n>Home_headerLabel}"/>
-		</landmarkInfo>
+            <PageAccessibleLandmarkInfo
+                rootRole="Region"
+                rootLabel="{i18n>homeTitle} {i18n>Home_rootLabel}"
+                subHeaderRole="Search"
+                subHeaderLabel="{i18n>Home_subHeaderLabel}"
+                contentRole="Navigation"
+                contentLabel="{i18n>Home_contentLabel}"
+                headerRole="Region"
+                headerLabel="{i18n>Home_headerLabel}"
+            />
+        </landmarkInfo>
         <headerContent>
-			<Button
-				icon="sap-icon://home"
-				press=".onBack"
-				visible="{appView>/smallScreenMode}"/>
-		</headerContent>
+                <!-- visible="{appView>/smallScreenMode}" -->
+            <Button
+                icon="sap-icon://home"
+                press=".onBack"
+            />
+        </headerContent>
         <subHeader>
-			<Toolbar id="searchBar33343">
-				<SearchField
-					id="searchField"
-					liveChange=".onSearch"
-					placeholder="{i18n>homeSearchPlaceholder}"
-					tooltip="{i18n>homeSearchTooltip}"
-					width="100%">
-				</SearchField>
-			</Toolbar>
-		</subHeader>
+            <Toolbar id="searchBar33343">
+                <SearchField
+                    id="searchField"
+                    liveChange=".onSearch"
+                    placeholder="{i18n>homeSearchPlaceholder}"
+                    tooltip="{i18n>homeSearchTooltip}"
+                    width="100%"
+                />
+            </Toolbar>
+        </subHeader>
         <content>
-				<!-- visible="{device>/support/touch}" -->
-			<PullToRefresh
-				id="pullToRefresh"
-				refresh=".onRefresh"/>
-                <List
-				visible="false"
-				id="productList"
-				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
-				selectionChange=".onProductListSelect"
-				noDataText="{i18n>homeNoData}"
+            <!-- visible="{device>/support/touch}" -->
+            <!-- mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" -->
+            <PullToRefresh
+                id="pullToRefresh"
+                refresh=".onRefresh"
+            />
+            <List
+                visible="false"
+                id="productList"
+                selectionChange=".onProductListSelect"
+                noDataText="{i18n>homeNoData}"
+                busyIndicatorDelay="0"
+                items="{Product>/Products}"
+            >
+                <items>
+                        <!-- type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" -->
+                    <ObjectListItem
+                        icon="{
+							path : 'Product>PictureUrl',
+							formatter : '.formatter.pictureUrl'
+						}"
+                        title="{Product>Name}"
+                        number="{
+							path : 'Product>Price',
+							formatter : '.formatter.price'
+						}"
+                        numberUnit="EUR"
+                        press=".onProductListItemPress"
+                        iconDensityAware="false"
+                    >
+                        <attributes>
+                            <ObjectAttribute text="{Product>SupplierName}" />
+                        </attributes>
+                        <firstStatus>
+                            <ObjectStatus
+                                text="{
+									path : 'Product>Status',
+									formatter : '.formatter.statusText'
+								}"
+                                state="{
+									path : 'Product>Status',
+									formatter : '.formatter.statusState'
+								}"
+                            />
+                        </firstStatus>
+                    </ObjectListItem>
+                </items>
+            </List>
+            <List
+				id="categoryList"
+				headerText="{i18n>homeCategoryListHeader}"
+				mode="None"
 				busyIndicatorDelay="0"
-				items="{/Products}">
-                </List>
+				items="{ProductCategorie>/ProductCategories}">
+				<items>
+					<StandardListItem
+						title="{ProductCategorie>CategoryName}"
+						type="Active"
+						counter="{ProductCategorie>NumberOfProducts}"
+						press=".onCategoryListItemPress"
+						tooltip="{i18n>openCategoryProducts} {ProductCategorie>CategoryName}">
+					</StandardListItem>
+				</items>
+			</List>
         </content>
     </Page>
 </mvc:View>

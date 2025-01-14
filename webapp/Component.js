@@ -18,12 +18,16 @@ sap.ui.define([
             UIComponent.prototype.init.apply(this, arguments);
 
             const productModel=new JSONModel();
-            productModel.loadData("../localService/Products.json");
-            this.setModel("Product",productModel);
+            productModel.loadData("../localService/mockdata/Products.json");
+            this.setModel(productModel,"Product");
 
             const pCModel=new JSONModel();
-            pCModel.loadData("../localService/ProductCategories.json");
-            this.setModel("Product",pCModel);
+            pCModel.loadData("../localService/mockdata/ProductCategories.json");
+            this.setModel(pCModel,"ProductCategorie");
+
+            const fPModel=new JSONModel();
+            fPModel.loadData("../localService/mockdata/FeaturedProducts.json");
+            this.setModel(fPModel,"FeaturedProduct");
 
             // set the device model
             this.setModel(models.createDeviceModel(), "device");

@@ -37,9 +37,14 @@
         "dependencies": {
             "minUI5Version": "1.131.1",
             "libs": {
-                "sap.m": {},
-                "sap.ui.core": {}
+                "sap.f": {},
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {}
             }
+        },
+        "resourceRoots": {
+            "sap.ui.demo": "./localService/mockdata"
         },
         "contentDensities": {
             "compact": true,
@@ -62,13 +67,12 @@
         },
         "routing": {
             "config": {
-                "routerClass": "sap.m.routing.Router",
-                "controlAggregation": "pages",
-                "controlId": "app",
-                "transition": "slide",
+                "routerClass": "sap.f.routing.Router",
                 "type": "View",
                 "viewType": "XML",
                 "path": "sap.ui.demo.shoppingcart.view",
+                "controlId": "layout",
+                "controlAggregation": "midColumnPages",
                 "async": true,
                 "viewPath": "sap.ui.demo.shoppingcart.view"
             },
@@ -77,14 +81,23 @@
                     "name": "RouteHome",
                     "pattern": ":?query:",
                     "target": [
-                        "TargetHome"
+                        "TargetHome",
+                        "TargetWelcome"
                     ]
                 }
             ],
             "targets": {
                 "TargetHome": {
                     "id": "Home",
-                    "name": "Home"
+                    "level": 1,
+                    "name": "Home",
+                    "controlAggregation": "beginColumnPages"
+                },
+                "TargetWelcome": {
+                    "id": "Welcome",
+                    "level": 0,
+                    "name": "Welcome",
+                    "controlAggregation": "midColumnPages"
                 }
             }
         },
