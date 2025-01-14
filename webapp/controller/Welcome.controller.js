@@ -33,8 +33,38 @@ sap.ui.define([
                 this._setLayout("Two");
             }
             if(sRouteName !== "RouteProduct" && sRouteName !== "RouteCartProduct"){
-                const fpModel=this.getModel("FeaturedProduct");
+                const fpProperty=this.getModel("FeaturedProduct").getProperty("/FeaturedProducts");
+                const products=this.getModel("Product").getProperty("/Products");
+                const aPromoted=[];
+                const aViewed=[];
+                const aFavorite=[];
 
+                const firstVal=Math.floor(Math.random() * (6 - 1)) + 1;
+                let secondVal=Math.floor(Math.random() * (6 - 1)) + 1;
+                while(secondVal== firstVal){
+                    secondVal=Math.floor(Math.random() * (6 - 1)) + 1;
+                }
+                let count=0;
+                for(let i=0;i<fpProperty.length;i++){
+                    if(fpProperty[i].Type == "Promoted"){
+                        count++;
+                        if(count==firstVal || count == secondVal){
+                            const fValue=products.filter(items=>items.ProductId == fpProperty[i].ProductId)[0];
+                            aPromoted.push(fValue);
+                        }
+                    }
+                    if(fpProperty[i].Type == "Viewed"){
+                        const fValue=products.filter(items=>items.ProductId == fpProperty[i].ProductId)[0];
+                        aViewed.push(fValue);
+                    }
+                    if(fpProperty[i].Type == "Favorite"){
+                        const fValue=products.filter(items=>items.ProductId == fpProperty[i].ProductId)[0];
+                        aFavorite.push(fValue);
+                    }
+                }
+                this.getModel("view").setProperty("/Promoted",aPromoted);
+                this.getModel("view").setProperty("/Viewed",aViewed);
+                this.getModel("view").setProperty("/Favorite",aFavorite);
             }
         },
         onCarouselPageChanged: function () {
