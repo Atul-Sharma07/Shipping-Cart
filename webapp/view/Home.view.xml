@@ -1,6 +1,53 @@
-<mvc:View controllerName="sap.ui.demo.shoppingcart.controller.Home"
+<mvc:View 
+    controllerName="sap.ui.demo.shoppingcart.controller.Home"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page 
+        id="page" 
+        title="{i18n>homeTitle}"
+        backgroundDesign="Solid">
+        <landmarkInfo>
+			<PageAccessibleLandmarkInfo
+				rootRole="Region"
+				rootLabel="{i18n>homeTitle} {i18n>Home_rootLabel}"
+				subHeaderRole="Search"
+				subHeaderLabel="{i18n>Home_subHeaderLabel}"
+				contentRole="Navigation"
+				contentLabel="{i18n>Home_contentLabel}"
+				headerRole="Region" headerLabel="{i18n>Home_headerLabel}"/>
+		</landmarkInfo>
+        <headerContent>
+			<Button
+				icon="sap-icon://home"
+				press=".onBack"
+				visible="{appView>/smallScreenMode}"/>
+		</headerContent>
+        <subHeader>
+			<Toolbar id="searchBar33343">
+				<SearchField
+					id="searchField"
+					liveChange=".onSearch"
+					placeholder="{i18n>homeSearchPlaceholder}"
+					tooltip="{i18n>homeSearchTooltip}"
+					width="100%">
+				</SearchField>
+			</Toolbar>
+		</subHeader>
+        <content>
+				<!-- visible="{device>/support/touch}" -->
+			<PullToRefresh
+				id="pullToRefresh"
+				refresh=".onRefresh"/>
+                <List
+				visible="false"
+				id="productList"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
+				selectionChange=".onProductListSelect"
+				noDataText="{i18n>homeNoData}"
+				busyIndicatorDelay="0"
+				items="{/Products}">
+                </List>
+        </content>
     </Page>
 </mvc:View>

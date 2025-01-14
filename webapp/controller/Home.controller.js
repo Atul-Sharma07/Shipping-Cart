@@ -1,10 +1,16 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "./BaseController",
+    "../model/formatter",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sap/ui/Device"
+], (BaseController,formatter,Filter,FilterOperator) => {
     "use strict";
 
-    return Controller.extend("sap.ui.demo.shoppingcart.controller.Home", {
+    return BaseController.extend("sap.ui.demo.shoppingcart.controller.Home", {
+        formatter : formatter,
         onInit() {
+            
         }
     });
 });
