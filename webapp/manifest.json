@@ -84,6 +84,14 @@
                         "TargetHome",
                         "TargetWelcome"
                     ]
+                },
+                {
+                    "name": "RouteCategory",
+                    "pattern": "Category/{Category}",
+                    "target": [
+                        "TargetCategory",
+                        "TargetWelcome"
+                    ]
                 }
             ],
             "targets": {
@@ -98,7 +106,13 @@
                     "level": 0,
                     "name": "Welcome",
                     "controlAggregation": "midColumnPages"
-                }
+                },
+                "TargetCategory": {
+					"name": "Category",
+					"level": 2,
+					"controlAggregation": "beginColumnPages",
+					"id": "category"
+				}
             }
         },
         "rootView": {

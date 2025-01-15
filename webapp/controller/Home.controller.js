@@ -14,6 +14,14 @@ sap.ui.define([
         },
         onSearch:function(oEvent){
             
+        },
+        onCategoryListItemPress:function(oEvent){
+            const sPath=oEvent.getSource().getBindingContext("ProductCategorie").getPath();
+            const pCData=this.getOwnerComponent().getModel("ProductCategorie").getProperty(sPath);
+            const oRouter=this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteCategory",{
+                Category:pCData.Category
+            })
         }
     });
 });

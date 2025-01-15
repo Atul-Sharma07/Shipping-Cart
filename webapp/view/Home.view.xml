@@ -44,16 +44,14 @@
             <!-- mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" -->
             <PullToRefresh
                 id="pullToRefresh"
-                refresh=".onRefresh"
-            />
+                refresh=".onRefresh"/>
             <List
                 visible="false"
                 id="productList"
                 selectionChange=".onProductListSelect"
                 noDataText="{i18n>homeNoData}"
                 busyIndicatorDelay="0"
-                items="{Product>/Products}"
-            >
+                items="{Product>/Products}">
                 <items>
                         <!-- type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" -->
                     <ObjectListItem
