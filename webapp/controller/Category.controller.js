@@ -20,6 +20,15 @@ sap.ui.define([
             const products=oModel.getProperty("/Products");
             const sProduct=products.filter(items=> items.Category == Category);
             oModel.setProperty("/selectedProducts",sProduct);
+        },
+        onProductDetails:function(oEvent){
+            const sPath= oEvent.getSource().getSelectedItem().getBindingContext("Product").getPath();
+            const product=this.getOwnerComponent().getModel("Product").getProperty(sPath);
+            const oRouter=this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteProduct",{
+                Category:product.Category,
+                ProductId:product.ProductId
+            })            
         }
     });
 });

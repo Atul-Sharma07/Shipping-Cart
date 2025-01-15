@@ -92,6 +92,14 @@
                         "TargetCategory",
                         "TargetWelcome"
                     ]
+                },
+                {
+                    "name": "RouteProduct",
+                    "pattern": "Category/{Category}/Product/{ProductId}",
+                    "target": [
+                        "TargetCategory",
+                        "TargetProduct"
+                    ]
                 }
             ],
             "targets": {
@@ -112,7 +120,13 @@
 					"level": 2,
 					"controlAggregation": "beginColumnPages",
 					"id": "category"
-				}
+				},
+                "TargetProduct": {
+                    "id": "Product",
+                    "level": 0,
+                    "name": "Product",
+                    "controlAggregation": "midColumnPages"
+                }
             }
         },
         "rootView": {

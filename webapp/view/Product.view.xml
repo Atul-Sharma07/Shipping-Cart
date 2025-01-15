@@ -1,0 +1,103 @@
+<mvc:View
+    controllerName="sap.ui.demo.shoppingcart.controller.Product"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <Page
+        id="productPage">
+        <customHeader>
+			<Bar>
+				<contentLeft>
+					<Button
+						type="Back"
+						visible="{appView>/smallScreenMode}"
+						press=".onBack"/>
+				</contentLeft>
+				<contentMiddle>
+					<Title
+						level="H2"
+						text="{Product>Name}"/>
+				</contentMiddle>
+				<contentRight>
+					<Button
+						icon="sap-icon://customer"
+						press=".onAvatarPress"
+						tooltip="{i18n>avatarButtonTooltip}"/>
+					<ToggleButton
+						icon="sap-icon://cart"
+						pressed="{= ${appView>/layout}.startsWith('ThreeColumns') }"
+						tooltip="{i18n>toCartButtonTooltip}"
+						press=".onToggleCart">
+					</ToggleButton>
+				</contentRight>
+			</Bar>
+		</customHeader>
+        <footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button
+					text="{i18n>addToCartShort}"
+					type="Emphasized"
+					press=".onAddToCart" />
+			</Toolbar>
+		</footer>
+        <content>
+			<ObjectHeader
+				title="{Product>Name}"
+				titleLevel="H3"
+				number="{
+					path : 'Price',
+					formatter : '.formatter.price'
+				}"
+				numberUnit="EUR">
+				<attributes>
+					<ObjectAttribute
+						title="{i18n>productSupplierAttributeText}"
+						text="{Product>SupplierName}"/>
+					<ObjectAttribute
+						title="{i18n>productDescriptionAttributeText}"
+						text="{Product>ShortDescription}"/>
+					<ObjectAttribute
+						title="{i18n>productWeightAttributeText}"
+						text="{Product>Weight} {Product>WeightUnit}"/>
+					<ObjectAttribute
+						title="{i18n>productMeasuresAttributeText}"
+						text="{Product>DimensionWidth} {Product>Unit}, {Product>DimensionDepth} {Product>Unit}, {Product>DimensionHeight} {Product>Unit}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{
+							path : 'Product>Status',
+							formatter : '.formatter.statusText'
+						}"
+						state="{
+							path : 'Product>Status',
+							formatter : '.formatter.statusState'
+						}"/>
+				</statuses>
+			</ObjectHeader>
+			<VBox
+				alignItems="Center"
+				renderType="Div">
+				<Image
+					id="productImage"
+					src="{path : 'Product>PictureUrl', formatter : '.formatter.pictureUrl'}"
+					decorative="true"
+					densityAware="false"
+					class="sapUiSmallMargin"
+					width="100%"
+					height="100%">
+					<detailBox>
+						<LightBox id="lightBox">
+							<imageContent>
+								<LightBoxItem
+									imageSrc="{path : 'Product>PictureUrl', formatter : '.formatter.pictureUrl'}"
+									title="{Product>Name}"/>
+							</imageContent>
+						</LightBox>
+					</detailBox>
+				</Image>
+			</VBox>
+		</content>
+    </Page>
+</mvc:View>
