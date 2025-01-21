@@ -19,18 +19,18 @@ sap.ui.define([
             const sPModel=oModel.getProperty("/Products");
             const product=sPModel.filter(items=> items.ProductId == ProductId)[0];
 
-
             console.log(product);
-            // this.getView().bindElement(product);
-            // oModel.setProperty("/selectedProduct",product);
             const oView= this.getView();
-            const sPath=sPModel.indexOf(product);;
-
-
+            const sPath=sPModel.indexOf(product);
             oView.bindElement({
                 path : `/Products/${sPath}`,
                 model: "Product"
             });
+
+            const Category=oEvent.getParameter("arguments").Category;
+            const products=oModel.getProperty("/Products");
+            const sProduct=products.filter(items=> items.Category == Category);
+            oModel.setProperty("/selectedProducts",sProduct);
         }
     })
 })

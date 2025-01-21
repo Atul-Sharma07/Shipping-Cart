@@ -52,6 +52,12 @@ sap.ui.define([
 				return undefined;
 			}
 		},
+		hasItems: function (oCollection1, oCollection2) {
+			var bCollection1Filled = !!(oCollection1 && Object.keys(oCollection1).length),
+				bCollection2Filled = !!(oCollection2 && Object.keys(oCollection2).length);
+
+			return bCollection1Filled || bCollection2Filled;
+		}
     }
     return formatter;
 

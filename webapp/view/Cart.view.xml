@@ -1,0 +1,37 @@
+<mvc:View
+    controllerName="sap.ui.demo.shoppingcart.controller.Cart"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+>
+    <Page
+        title="{cfg>/pageTitle}"
+		backgroundDesign="Solid"
+		showNavButton="{appView>/smallScreenMode}"
+		navButtonPress=".onBack"
+		showFooter="true">
+        <landmarkInfo>
+			<PageAccessibleLandmarkInfo
+				rootRole="Region"
+				rootLabel="{i18n>Cart_rootLabel}"
+				contentRole="Main"
+				contentLabel="{i18n>Cart_contentLabel}"
+				footerRole="Region"
+				footerLabel="{i18n>Cart_footerLabel}"
+				headerRole="Region"
+				headerLabel="{i18n>Cart_headerLabel}"/>
+		</landmarkInfo>
+        <headerContent>
+			<Button
+				id="editButton"
+				icon="sap-icon://edit"
+				enabled="{parts: [
+					{path: 'cartProducts>/cartEntries'},
+					{path: 'cartProducts>/savedForLaterEntries'}
+				 ], formatter : '.formatter.hasItems'}"
+				visible="{cfg>/notInDelete}"
+				press=".onEditOrDoneButtonPress"
+				tooltip="{i18n>cartEditButtonTooltip}"/>
+		</headerContent>
+    </Page>
+</mvc:View>

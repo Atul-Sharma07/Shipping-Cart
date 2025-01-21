@@ -76,6 +76,23 @@ sap.ui.define([
 					this.onCarouselPageChanged();
 				}
 			}.bind(this), this._iCarouselLoopTime);
-		}
+		},
+        onSelectProduct:function(oEvent){
+            const sPath = oEvent.getSource().getBindingContext("view").getPath();
+            const oProperty=this.getModel("view").getProperty(sPath);
+            const oRouter=this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteProduct",{
+                Category:oProperty.Category,
+                ProductId:oProperty.ProductId
+            }) 
+        },
+        onToggleCart:function(oEvent){
+            var bPressed = oEvent.getParameter("pressed");
+
+			this._setLayout(bPressed ? "Three" : "Two");
+			this.getRouter().navTo(bPressed ? "RouteCart" : "RouteHome");
+            // const oRouter = this.getOwnerComponent().getRouter();
+            // oRouter.navTo("RouteCart");
+        }
     });
 });

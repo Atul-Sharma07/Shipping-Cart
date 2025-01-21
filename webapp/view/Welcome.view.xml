@@ -43,6 +43,10 @@
                         tooltip="{i18n>toCartButtonTooltip}"
                         press=".onToggleCart"
                     />
+                    <Text
+                        text="10"
+                        class="customBadge"
+                        visible="false" />
                 </contentRight>
             </Bar>
         </customHeader>

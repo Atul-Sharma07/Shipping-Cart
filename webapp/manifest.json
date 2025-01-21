@@ -100,6 +100,15 @@
                         "TargetCategory",
                         "TargetProduct"
                     ]
+                },
+                {
+                    "name": "RouteCart",
+                    "pattern": "RouteCart",
+                    "target": [
+                        "TargetHome",
+                        "TargetWelcome",
+                        "TargetCart"
+                    ]
                 }
             ],
             "targets": {
@@ -126,6 +135,11 @@
                     "level": 0,
                     "name": "Product",
                     "controlAggregation": "midColumnPages"
+                },
+                "TargetCart": {
+                    "id": "Cart",
+                    "name": "Cart",
+                    "controlAggregation": "endColumnPages"
                 }
             }
         },
